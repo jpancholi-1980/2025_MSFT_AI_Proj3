@@ -25,7 +25,7 @@ def parse_args():
     return args
 
 def main(args):  # Write the function name for the main data preparation logic
-    '''Read, preprocess, split, and save datasets'''
+    '''Read, split, and save datasets'''
 
     # Reading Data
     df = pd.read_csv(args.raw_data)
@@ -40,8 +40,8 @@ def main(args):  # Write the function name for the main data preparation logic
     # Save the train and test data
     os.makedirs(args.train_data, exist_ok=True)  # Create directories for train_data and test_data
     os.makedirs(args.test_data, exist_ok=True)  # Create directories for train_data and test_data
-    train_df.to_csv(os.path.join(args.train_data, "data.csv"), index=False)  # Specify the name of the train data file
-    test_df.to_csv(os.path.join(args.test_data, "data.csv"), index=False)  # Specify the name of the test data file
+    train_df.to_csv(os.path.join(args.train_data, "train.csv"), index=False)  # Specify the name of the train data file
+    test_df.to_csv(os.path.join(args.test_data, "test.csv"), index=False)  # Specify the name of the test data file
 
     # log the metrics
     mlflow.log_metric('train size', train_df.shape[0])

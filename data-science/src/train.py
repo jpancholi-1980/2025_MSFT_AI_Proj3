@@ -13,6 +13,7 @@ from sklearn.metrics import mean_squared_error
 import mlflow
 import mlflow.sklearn
 import os
+from matplotlib import pyplot as plt
 
 def parse_args():
     '''Parse input arguments'''
@@ -33,11 +34,11 @@ def parse_args():
 def main(args):
     '''Read train and test datasets, train model, evaluate model, save trained model'''
 
-    # Read train and test data from _______
+    # Read train and test data from CSV
     train_df = pd.read_csv(Path(args.train_data)/"train.csv")
     test_df = pd.read_csv(Path(args.test_data)/"test.csv")
 
-    # Split the data into ______(X) and ______(y) 
+    # Split the data into Feature (X) and Target (y) 
     y_train = train_df['price']  # Specify the target column
     X_train = train_df.drop(columns=['price'])
     y_test = test_df['price']

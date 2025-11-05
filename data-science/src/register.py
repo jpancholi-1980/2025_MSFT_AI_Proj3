@@ -37,7 +37,7 @@ def main(args):
     run_id = mlflow.active_run().info.run_id
     model_uri = f'runs:/{run_id}/{args.model_name}'
     mlflow_model = mlflow.register_model(model_uri, args.model_name)  # register the model with model_uri and model_name
-    mmodel_version = mlflow_model.version  # Get the version of the registered model
+    model_version = mlflow_model.version  # Get the version of the registered model
 
     # Write model info
     print("Writing JSON")

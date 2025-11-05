@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
-display_name: usedcar_pricing_training-pipeline  # Provide the display name for the pipeline
-experiment_name: usedcar_pricing_training  # Provide the experiment name
+display_name: usedcar_pricing_training_pipeline  # Provide the display name for the pipeline
+experiment_name: usedcar-pricing-training  # Provide the experiment name
 description: Training Pipeline to predict used Car Pricing using regression  # Provide the description for the pipeline
 
 inputs:
@@ -22,7 +22,7 @@ settings:
 jobs:
   prep_data:
     name: prep_data  # Provide the job name
-    display_name: prep_data  # Provide the display name for the job
+    display_name: prep-data  # Provide the display name for the job
     code: ../../../data-science/src
     command: >-
       python prep.py  
@@ -31,14 +31,14 @@ jobs:
       --test_data ${{outputs.test_data}} 
     environment: azureml:used-cars-train-env@latest
     inputs:
-      raw_data: ${{parent.inputs.raw_data}}
+      raw_data: ${{parent.inputs.input}}
     outputs:
       train_data: ${{parent.outputs.train_data}}
       test_data: ${{parent.outputs.test_data}}
 
   sweep_step:
     name: sweep_job
-    display_name: sweep_job  # Hint: Provide the display name for the job
+    display_name: sweep-job  # Hint: Provide the display name for the job
     type: sweep
     inputs:
       train_data: ${{parent.jobs.prep_data.outputs.train_data}}
