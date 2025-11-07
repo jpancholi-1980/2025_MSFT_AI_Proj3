@@ -66,15 +66,15 @@ jobs:
           running=("NotStarted" "Queued" "Starting" "Preparing" "Running" "Finalizing" "CancelRequested")
           while [[ ${running[*]} =~ $status ]]
           do
-            sleep 20 
+            sleep 15 
             status=$(az ml job show -n $run_id --resource-group ${{ inputs.resource_group }} --workspace-name ${{ inputs.workspace_name }} --query status -o tsv)
             echo $status
           done
           if [[ "$status" != "Completed" ]]  
           then
-            echo "Training Job failed or canceled 1"
+            echo "Training Job failed or canceled"
             echo $status
             echo $run_id
-            echo "Training Job failed or canceled 2"
+            echo "Training Job failed or canceled"
             exit 3
           fi
